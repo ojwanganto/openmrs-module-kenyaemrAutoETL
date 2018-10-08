@@ -47,7 +47,9 @@
 		<reportingVersion>0.9.8.1</reportingVersion>
 		<serializationxstreamVersion>0.2.7</serializationxstreamVersion>
 		<uiframeworkVersion>3.2.2</uiframeworkVersion>
+		<jsoup.version>1.11.3</jsoup.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
 	</properties>
 
 	<dependencyManagement>
@@ -208,6 +210,12 @@
 				<groupId>org.json</groupId>
 				<artifactId>json</artifactId>
 				<version>20170516</version>
+			</dependency>
+			<dependency>
+				<!-- jsoup HTML parser library @ https://jsoup.org/ -->
+				<groupId>org.jsoup</groupId>
+				<artifactId>jsoup</artifactId>
+				<version>${jsoup.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
