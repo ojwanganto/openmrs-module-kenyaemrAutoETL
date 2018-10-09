@@ -21,7 +21,7 @@
 	<bean id="kenyaemr.pivottable.chart" factory-bean="kenyacore.appFactoryBean" factory-method="createInstance">
 		<constructor-arg value="htmltoetlgenerator.home" />
 		<constructor-arg value="HTML to ETL" />
-		<constructor-arg value="kenyaemrCharts/kenyaemrhtmltoetlhome.page" />
+		<constructor-arg value="kenyaemrCharts/kenyaemrHtmlToEtlHome.page" />
 		<constructor-arg value="kenyaui:apps/reports.png" />
 		<constructor-arg value="900" />
 	</bean>

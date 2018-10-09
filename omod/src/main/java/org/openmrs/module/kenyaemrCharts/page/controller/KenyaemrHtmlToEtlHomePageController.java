@@ -14,6 +14,7 @@ import org.openmrs.ui.framework.resource.ResourceFactory;
 public class KenyaemrHtmlToEtlHomePageController {
 
     public void controller(@SpringBean FormManager formManager, @SpringBean ResourceFactory resourceFactory){
+        System.out.println("Preparing to process html forms");
         FormProcessor.getAllForms(formManager, resourceFactory);
 
     }
