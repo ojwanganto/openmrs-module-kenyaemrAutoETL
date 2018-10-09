@@ -3,13 +3,16 @@ package org.openmrs.module.kenyaemrCharts.forms;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.openmrs.Form;
+import org.openmrs.api.ConceptService;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.htmlformentry.HtmlForm;
 import org.openmrs.module.kenyacore.form.FormDescriptor;
 import org.openmrs.module.kenyacore.form.FormManager;
 import org.openmrs.module.kenyacore.form.FormUtils;
 import org.openmrs.ui.framework.resource.ResourceFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,8 +20,11 @@ import java.util.List;
 
 public class FormProcessor {
 
+
+
     public static void getAllForms(FormManager formManager, ResourceFactory resourceFactory) {
 
+        ConceptService conceptService = Context.getConceptService();
 
         List<FormDescriptor> formList = new ArrayList<FormDescriptor>(formManager.getAllFormDescriptors());
         System.out.println("Getting into the loop");
@@ -45,8 +51,16 @@ public class FormProcessor {
         if (triageFormHtml != null) {
             Document doc = Jsoup.parse(triageFormHtml);
             Element htmlform = doc.select("htmlform").first();
+            Elements obsTags = htmlform.select("obs");
 
-            System.out.println("Read html form: " + htmlform.html());
+            for (Element obsTag : obsTags) {
+                String conceptId = obsTag.attr("conceptId");
+                System.out.println("Obs tag: " + conceptId +
+                        "Concept Name: " + conceptService.getConceptByUuid(conceptId).getName().getName()
+                );
+            }
+
+            //System.out.println("Read html form: " + htmlform.html());
         }
 
 
