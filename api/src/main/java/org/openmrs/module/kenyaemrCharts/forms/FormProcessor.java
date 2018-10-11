@@ -12,6 +12,9 @@ import org.openmrs.module.htmlformentry.HtmlForm;
 import org.openmrs.module.kenyacore.form.FormDescriptor;
 import org.openmrs.module.kenyacore.form.FormManager;
 import org.openmrs.module.kenyacore.form.FormUtils;
+import org.openmrs.module.kenyaemrCharts.htmlMetadata.FormDataPoint;
+import org.openmrs.module.kenyaemrCharts.htmlMetadata.FormMetadataUtils;
+import org.openmrs.module.kenyaemrCharts.htmlMetadata.HtmlEtlFormSchema;
 import org.openmrs.ui.framework.resource.ResourceFactory;
 
 import java.io.IOException;
@@ -27,10 +30,11 @@ public class FormProcessor {
         ConceptService conceptService = Context.getConceptService();
 
         List<FormDescriptor> formList = new ArrayList<FormDescriptor>(formManager.getAllFormDescriptors());
-        System.out.println("----------------------------------------------------------------------------------");
+        System.out.println("############################# HTML Form Processor #########################");
         String triageFormHtml = null;
         for(FormDescriptor formDescriptor : formList) {
-            Form form = Context.getFormService().getFormByUuid(formDescriptor.getTargetUuid());
+            String targetUuid = formDescriptor.getTargetUuid();
+            Form form = Context.getFormService().getFormByUuid(targetUuid);
             if(form != null) {
 
                 HtmlForm htmlForm = null;
@@ -41,49 +45,34 @@ public class FormProcessor {
                 }
 
                 if (htmlForm != null && htmlForm.getName().equals("Triage")) {
-                    //System.out.println("Form Details: Name: " + htmlForm.getName() + ", HTML: " + htmlForm.getXmlData());
+
+                    HtmlEtlFormSchema schema = new HtmlEtlFormSchema(targetUuid, htmlForm.getName());
                     triageFormHtml = htmlForm.getXmlData();
+                    Document doc = Jsoup.parse(triageFormHtml);
+                    Element htmlform = doc.select("htmlform").first();
+                    Elements obsTags = htmlform.select("obs");
+
+                    List<FormDataPoint> dataPoints = new ArrayList<FormDataPoint>();
+                    for (Element obsTag : obsTags) {
+                        String conceptUUId = obsTag.attr("conceptId");
+                        Concept concept = conceptService.getConceptByUuid(conceptUUId);
+                        String dataType = FormMetadataUtils.getConceptDatatype(concept);
+                        FormDataPoint dataPoint = new FormDataPoint();
+                        dataPoint.setConceptUUID(conceptUUId);
+                        dataPoint.setConceptName(concept.getName().getName());
+                        dataPoint.setDataType(dataType);
+                        dataPoint.setGeneratedName(concept.getName().getName().
+                                replace(' ','_').
+                                replace('(', '_').
+                                replace(')','_'));
+                        dataPoints.add(dataPoint);
+
+                    }
+                    schema.setDataPoints(dataPoints);
+                    FormMetadataUtils.htmlFormSchemaPrintout(schema);
                     break;
                 }
             }
         }
-
-        if (triageFormHtml != null) {
-            Document doc = Jsoup.parse(triageFormHtml);
-            Element htmlform = doc.select("htmlform").first();
-            Elements obsTags = htmlform.select("obs");
-
-            for (Element obsTag : obsTags) {
-                String conceptUUId = obsTag.attr("conceptId");
-                Concept concept = conceptService.getConceptByUuid(conceptUUId);
-                String dataType = getConceptDatatype(concept);
-                System.out.println("Obs tag: " + conceptUUId +
-                        "Concept Name: " + conceptService.getConceptByUuid(conceptUUId).getName().getName() +
-                        ", Datatype: " + dataType
-                );
-            }
-
-            //System.out.println("Read html form: " + htmlform.html());
-        }
-
-
-    }
-
-    public static String getConceptDatatype(Concept concept) {
-        if (concept == null)
-            return null;
-
-        if (concept.getDatatype().isCoded()) {
-            return "Coded";
-        } else if (concept.getDatatype().isBoolean()) {
-            return "Boolean";
-        } else if (concept.getDatatype().isText()) {
-            return "Text";
-        } else if (concept.getDatatype().isDateTime() || concept.getDatatype().isDate()) {
-            return "Datetime";
-        } else if (concept.getDatatype().isNumeric()) {
-            return "Numeric";
-        }
-        return null;
     }
 }

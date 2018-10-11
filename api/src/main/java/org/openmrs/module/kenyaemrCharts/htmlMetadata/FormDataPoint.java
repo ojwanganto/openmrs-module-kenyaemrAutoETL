@@ -5,9 +5,10 @@ package org.openmrs.module.kenyaemrCharts.htmlMetadata;
  */
 public class FormDataPoint {
     String conceptUUID;
-    String dataPointConceptName;
-    String dataPointGeneratedName;
-    String dataPointPreferredName;
+    String conceptName;
+    String generatedName;
+    String preferredName;
+    String dataType;
 
     public String getConceptUUID() {
         return conceptUUID;
@@ -17,27 +18,35 @@ public class FormDataPoint {
         this.conceptUUID = conceptUUID;
     }
 
-    public String getDataPointConceptName() {
-        return dataPointConceptName;
+    public String getConceptName() {
+        return conceptName;
     }
 
-    public void setDataPointConceptName(String dataPointConceptName) {
-        this.dataPointConceptName = dataPointConceptName;
+    public void setConceptName(String conceptName) {
+        this.conceptName = conceptName;
     }
 
-    public String getDataPointGeneratedName() {
-        return dataPointGeneratedName;
+    public String getGeneratedName() {
+        return generatedName;
     }
 
-    public void setDataPointGeneratedName(String dataPointGeneratedName) {
-        this.dataPointGeneratedName = dataPointGeneratedName;
+    public void setGeneratedName(String generatedName) {
+        this.generatedName = generatedName;
     }
 
-    public String getDataPointPreferredName() {
-        return dataPointPreferredName;
+    public String getPreferredName() {
+        return preferredName;
     }
 
-    public void setDataPointPreferredName(String dataPointPreferredName) {
-        this.dataPointPreferredName = dataPointPreferredName;
+    public void setPreferredName(String preferredName) {
+        this.preferredName = preferredName;
+    }
+
+    public String getDataType() {
+        return dataType;
+    }
+
+    public void setDataType(String dataType) {
+        this.dataType = dataType;
     }
 }
