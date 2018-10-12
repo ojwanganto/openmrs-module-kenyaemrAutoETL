@@ -33,7 +33,7 @@ public class DDLTemplate extends QueryTemplate {
         // iterate through data points
         StringBuilder builder = new StringBuilder();
         for (FormDataPoint dataPoint : dataPoints) {
-            builder.append("\t").append(dataPoint.getGeneratedName())// indent a bit
+            builder.append("\t").append(dataPoint.getGeneratedName().toLowerCase())// indent a bit
                     .append(" ")
                     .append(getTypeFromDataPoint(dataPoint))
                     .append(", \n");
@@ -48,13 +48,13 @@ public class DDLTemplate extends QueryTemplate {
         String pointDataType = dataPoint.getDataType();
         String columnTypeString = null;
         if (pointDataType.equals("Coded") || pointDataType.equals("Numeric")) {
-            columnTypeString = " INT(11) ";
+            columnTypeString = "INT(11)";
         } else if (pointDataType.equals("Boolean")) {
-            columnTypeString = " VARCHAR(10) ";
+            columnTypeString = "VARCHAR(10)";
         } else if (pointDataType.equals("Datetime")) {
-            columnTypeString = " DATETIME ";
+            columnTypeString = "DATETIME";
         } else if (pointDataType.equals("Text")) {
-            columnTypeString = " VARCHAR(255) ";
+            columnTypeString = "VARCHAR(255)";
         }
 
         return columnTypeString;
