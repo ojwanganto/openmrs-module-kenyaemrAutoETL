@@ -5,6 +5,7 @@ import java.util.List;
 public class HtmlEtlFormSchema {
     private String formUUID;
     private String formName;
+    private String generatedTableName;
     private List<FormDataPoint> dataPoints;
     private String ddlQueryStatement;
     private String dmlQueryStatement;
@@ -36,6 +37,14 @@ public class HtmlEtlFormSchema {
 
     public void setFormName(String formName) {
         this.formName = formName;
+    }
+
+    public String getGeneratedTableName() {
+        return generatedTableName;
+    }
+
+    public void setGeneratedTableName(String generatedTableName) {
+        this.generatedTableName = generatedTableName;
     }
 
     public List<FormDataPoint> getDataPoints() {

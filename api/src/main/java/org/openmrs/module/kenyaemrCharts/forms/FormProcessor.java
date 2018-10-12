@@ -1,5 +1,6 @@
 package org.openmrs.module.kenyaemrCharts.forms;
 
+import org.apache.commons.lang.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -47,6 +48,11 @@ public class FormProcessor {
                 if (htmlForm != null && htmlForm.getName().equals("Triage")) {
 
                     HtmlEtlFormSchema schema = new HtmlEtlFormSchema(targetUuid, htmlForm.getName());
+                    //process generated table name
+                    String generatedTableName = StringUtils.replace(htmlForm.getName()," ", "_");
+                    generatedTableName = StringUtils.replace(generatedTableName,"(", "_");
+                    generatedTableName = StringUtils.replace(generatedTableName,")", "_");
+                    schema.setGeneratedTableName(generatedTableName.toLowerCase());
                     triageFormHtml = htmlForm.getXmlData();
                     Document doc = Jsoup.parse(triageFormHtml);
                     Element htmlform = doc.select("htmlform").first();
@@ -59,6 +65,7 @@ public class FormProcessor {
                         String dataType = FormMetadataUtils.getConceptDatatype(concept);
                         FormDataPoint dataPoint = new FormDataPoint();
                         dataPoint.setConceptUUID(conceptUUId);
+                        dataPoint.setConceptId(concept.getConceptId());
                         dataPoint.setConceptName(concept.getName().getName());
                         dataPoint.setDataType(dataType);
                         dataPoint.setGeneratedName(concept.getName().getName().
@@ -69,7 +76,10 @@ public class FormProcessor {
 
                     }
                     schema.setDataPoints(dataPoints);
-                    FormMetadataUtils.htmlFormSchemaPrintout(schema);
+                    //FormMetadataUtils.htmlFormSchemaPrintout(schema);
+                    System.out.println("####################################### DDL Query ########################################");
+
+                    System.out.println(FormMetadataUtils.buildHtmlEtlTableDDL(schema));
                     break;
                 }
             }

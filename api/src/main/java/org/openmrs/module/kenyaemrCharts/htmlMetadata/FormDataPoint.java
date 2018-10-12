@@ -4,11 +4,12 @@ package org.openmrs.module.kenyaemrCharts.htmlMetadata;
  * A model for data point i.e <obs></obs> tag
  */
 public class FormDataPoint {
-    String conceptUUID;
-    String conceptName;
-    String generatedName;
-    String preferredName;
-    String dataType;
+    private String conceptUUID;
+    private Integer conceptId;
+    private String conceptName;
+    private String generatedName;
+    private String preferredName;
+    private String dataType;
 
     public String getConceptUUID() {
         return conceptUUID;
@@ -16,6 +17,14 @@ public class FormDataPoint {
 
     public void setConceptUUID(String conceptUUID) {
         this.conceptUUID = conceptUUID;
+    }
+
+    public Integer getConceptId() {
+        return conceptId;
+    }
+
+    public void setConceptId(Integer conceptId) {
+        this.conceptId = conceptId;
     }
 
     public String getConceptName() {
