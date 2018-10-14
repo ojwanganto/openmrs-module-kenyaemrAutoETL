@@ -65,45 +65,4 @@ public class DDLTemplate extends QueryTemplate {
             return null;
         return "\tvoided INT(11)\n)";
     }
-
-    /*String sampleQuery= "create table kenyaemr_etl.etl_hiv_enrollment(\n" +
-                "uuid char(38) ,\n" +
-                "patient_id INT(11) NOT NULL,\n" +
-                "visit_id INT(11) DEFAULT NULL,\n" +
-                "visit_date DATE,\n" +
-                "location_id INT(11) DEFAULT NULL,\n" +
-                "encounter_id INT(11) NOT NULL PRIMARY KEY,\n" +
-                "encounter_provider INT(11),\n" +
-                "patient_type INT(11),\n" +
-                "date_first_enrolled_in_care DATE,\n" +
-                "entry_point INT(11),\n" +
-                "transfer_in_date DATE,\n" +
-                "facility_transferred_from VARCHAR(255),\n" +
-                "district_transferred_from VARCHAR(255),\n" +
-                "date_started_art_at_transferring_facility DATE,\n" +
-                "date_confirmed_hiv_positive DATE,\n" +
-                "facility_confirmed_hiv_positive VARCHAR(255),\n" +
-                "arv_status INT(11),\n" +
-                "name_of_treatment_supporter VARCHAR(255),\n" +
-                "relationship_of_treatment_supporter INT(11),\n" +
-                "treatment_supporter_telephone VARCHAR(100),\n" +
-                "treatment_supporter_address VARCHAR(100),\n" +
-                "date_of_discontinuation DATETIME,\n" +
-                "discontinuation_reason INT(11),\n" +
-                "date_created DATE,\n" +
-                "voided INT(11),\n" +
-                "constraint foreign key(patient_id) references kenyaemr_etl.etl_patient_demographics(patient_id),\n" +
-                "CONSTRAINT unique_uuid UNIQUE(uuid),\n" +
-                "index(patient_id),\n" +
-                "index(visit_id),\n" +
-                "index(visit_date),\n" +
-                "index(date_started_art_at_transferring_facility),\n" +
-                "index(arv_status),\n" +
-                "index(date_confirmed_hiv_positive),\n" +
-                "index(entry_point),\n" +
-                "index(transfer_in_date),\n" +
-                "index(date_first_enrolled_in_care),\n" +
-                "index(entry_point, transfer_in_date, visit_date, patient_id)\n" +
-                "\n" +
-                ");";*/
 }

@@ -111,6 +111,8 @@ public class FormProcessor {
                     System.out.println("####################################### DDL Query ########################################");
 
                     System.out.println(FormMetadataUtils.buildHtmlEtlTableDDL(schema));
+                    System.out.println(FormMetadataUtils.buildHtmlEtlTableDML(schema));
+
                 }
             }
         }

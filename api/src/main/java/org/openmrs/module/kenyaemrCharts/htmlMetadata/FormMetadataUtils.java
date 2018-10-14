@@ -2,6 +2,7 @@ package org.openmrs.module.kenyaemrCharts.htmlMetadata;
 
 import org.openmrs.Concept;
 import org.openmrs.module.kenyaemrCharts.queryTemplate.DDLTemplate;
+import org.openmrs.module.kenyaemrCharts.queryTemplate.DMLTemplate;
 
 public class FormMetadataUtils {
     /**
@@ -69,7 +70,10 @@ public class FormMetadataUtils {
      * @return SQL statement
      */
     public static String buildHtmlEtlTableDML(HtmlEtlFormSchema schema) {
-        return null;
+        if (schema == null)
+            return null;
+        DMLTemplate dmlTemplate = new DMLTemplate();
+        return dmlTemplate.generateQuery(schema);
     }
 
     public static String createDatabase() {
