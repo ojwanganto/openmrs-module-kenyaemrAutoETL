@@ -3,7 +3,7 @@ package org.openmrs.module.kenyaemrCharts.queryTemplate;
 import org.openmrs.module.kenyaemrCharts.htmlMetadata.FormDataPoint;
 import org.openmrs.module.kenyaemrCharts.htmlMetadata.HtmlEtlFormSchema;
 
-import java.util.List;
+import java.util.Set;
 
 public class DDLTemplate extends QueryTemplate {
 
@@ -12,7 +12,7 @@ public class DDLTemplate extends QueryTemplate {
         if (schema == null)
             return null;
         StringBuilder builder = new StringBuilder();
-        List<FormDataPoint> dataPoints = schema.getDataPoints();
+        Set<FormDataPoint> dataPoints = schema.getDataPoints();
         String generatedTableName = QueryTemplate.DATABASE_NAME.concat(".").concat(schema.getGeneratedTableName());
         builder.append("DROP TABLE IF EXISTS ").append(generatedTableName).append(" ; \n");
         builder.append(getQueryHeader(generatedTableName))
@@ -27,11 +27,12 @@ public class DDLTemplate extends QueryTemplate {
         return "create table :tableName ( \n".replace(":tableName", tableName);
     }
 
-    private String buildQueryBody(List<FormDataPoint> dataPoints) {
+    private String buildQueryBody(Set<FormDataPoint> dataPoints) {
         if (dataPoints == null || dataPoints.size() == 0)
             return null;
         // iterate through data points
         StringBuilder builder = new StringBuilder();
+        builder.append(getStandardDeclarationFields());
         for (FormDataPoint dataPoint : dataPoints) {
             builder.append("\t").append(dataPoint.getGeneratedName().toLowerCase())// indent a bit
                     .append(" ")
@@ -60,9 +61,24 @@ public class DDLTemplate extends QueryTemplate {
         return columnTypeString;
     }
 
-    private String buildQueryTail(List<FormDataPoint> dataPoints) {
+    private String buildQueryTail(Set<FormDataPoint> dataPoints) {
         if (dataPoints == null || dataPoints.size() == 0)
             return null;
-        return "\tvoided INT(11)\n)";
+        return "\tvoided INT(11)\n);\n";
+    }
+
+    private String getStandardDeclarationFields() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("\tpatient_id INT(11) NOT NULL").append(", \n")
+                .append("\tvisit_id INT(11) DEFAULT NULL").append(", \n")
+                .append("\tvisit_date DATE").append(", \n")
+                .append("\tlocation_id INT(11) DEFAULT NULL").append(", \n")
+                .append("\tencounter_id INT(11) NOT NULL PRIMARY KEY").append(", \n")
+                .append("\tcreator INT(11) DEFAULT NULL").append(", \n")
+                .append("\tdate_created DATE").append(", \n");
+
+
+        return builder.toString();
+
     }
 }

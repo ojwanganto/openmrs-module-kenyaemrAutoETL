@@ -21,7 +21,9 @@ import org.openmrs.ui.framework.resource.ResourceFactory;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class FormProcessor {
 
@@ -46,7 +48,7 @@ public class FormProcessor {
                 "04295648-7606-11e8-adc0-fa7ae01bbebc"
         );
         System.out.println("############################# HTML Form Processor #########################");
-        String triageFormHtml = null;
+        String formHtml = null;
         for(FormDescriptor formDescriptor : formList) {
             String targetUuid = formDescriptor.getTargetUuid();
             Form form = Context.getFormService().getFormByUuid(targetUuid);
@@ -71,12 +73,21 @@ public class FormProcessor {
                     generatedTableName = StringUtils.replace(generatedTableName,"(", "_");
                     generatedTableName = StringUtils.replace(generatedTableName,")", "_");
                     schema.setGeneratedTableName(generatedTableName.toLowerCase());
-                    triageFormHtml = htmlForm.getXmlData();
-                    Document doc = Jsoup.parse(triageFormHtml);
+                    formHtml = htmlForm.getXmlData();
+                    Document doc = Jsoup.parse(formHtml);
+                    for( Element element : doc.select("repeat") ){
+                        element.remove();
+                    }
+
+                    for( Element element : doc.select("obsgroup") ){
+                        element.remove();
+                    }
+
                     Element htmlform = doc.select("htmlform").first();
+
                     Elements obsTags = htmlform.select("obs");
 
-                    List<FormDataPoint> dataPoints = new ArrayList<FormDataPoint>();
+                    Set<FormDataPoint> dataPoints = new HashSet<FormDataPoint>();
                     for (Element obsTag : obsTags) {
                         String conceptUUId = obsTag.attr("conceptId");
                         Concept concept = null;

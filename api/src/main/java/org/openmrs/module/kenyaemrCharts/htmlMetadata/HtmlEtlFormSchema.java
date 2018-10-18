@@ -1,12 +1,12 @@
 package org.openmrs.module.kenyaemrCharts.htmlMetadata;
 
-import java.util.List;
+import java.util.Set;
 
 public class HtmlEtlFormSchema {
     private String formUUID;
     private String formName;
     private String generatedTableName;
-    private List<FormDataPoint> dataPoints;
+    private Set<FormDataPoint> dataPoints;
     private String ddlQueryStatement;
     private String dmlQueryStatement;
     private String inCrementalUpdatesQueryStatement;
@@ -17,7 +17,7 @@ public class HtmlEtlFormSchema {
         this.formName = formName;
     }
 
-    public HtmlEtlFormSchema(String formUUID, String formName, List<FormDataPoint> dataPoints) {
+    public HtmlEtlFormSchema(String formUUID, String formName, Set<FormDataPoint> dataPoints) {
         this.formUUID = formUUID;
         this.formName = formName;
         this.dataPoints = dataPoints;
@@ -47,11 +47,11 @@ public class HtmlEtlFormSchema {
         this.generatedTableName = generatedTableName;
     }
 
-    public List<FormDataPoint> getDataPoints() {
+    public Set<FormDataPoint> getDataPoints() {
         return dataPoints;
     }
 
-    public void setDataPoints(List<FormDataPoint> dataPoints) {
+    public void setDataPoints(Set<FormDataPoint> dataPoints) {
         this.dataPoints = dataPoints;
     }
 
