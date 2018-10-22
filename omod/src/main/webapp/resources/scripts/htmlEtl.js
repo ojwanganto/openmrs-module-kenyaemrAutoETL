@@ -21,10 +21,11 @@ controller('HtmlEtlCtrl', ['$scope', '$window', '$location', '$timeout', '$q', '
                 ddlQuery:"test"
 
             }];
+        var etlForms = OpenMRS.Etlforms;
         $scope.init = function() {
 
             $timeout(function() {
-                $q.all(forms)
+                $q.all(etlForms)
                     .then(function(results) {
                         $scope.form =results ;
                         console.log('results',results);
@@ -35,9 +36,11 @@ controller('HtmlEtlCtrl', ['$scope', '$window', '$location', '$timeout', '$q', '
 
         $scope.selectedRow = null;
         $scope.showDmlQuery = function(test) {
+            $scope.dmlObj=test;
 
         };
         $scope.showDdlQuery = function(test) {
+            $scope.ddlObj = test
 
         };
 
@@ -45,6 +48,8 @@ controller('HtmlEtlCtrl', ['$scope', '$window', '$location', '$timeout', '$q', '
 
         $scope.closeModal = function() {
             $('#generalMessage').modal('hide');
+            $('#ddlMessage').modal('hide');
+
         };
 
         // events

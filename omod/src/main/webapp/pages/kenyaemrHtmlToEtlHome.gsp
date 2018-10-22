@@ -50,6 +50,7 @@ th, td {
 <script type="text/javascript">
 
     window.OpenMRS = window.OpenMRS || {};
+    window.OpenMRS.Etlforms = ${forms}
 
 </script>
 
@@ -85,28 +86,28 @@ th, td {
                                     <div class="table-responsive">
                                         <table class="table table-striped">
                                             <tr>
-                                                <th>Form</th>
                                                 <th>Form Name</th>
-                                                <th>Data Points</th>
+                                                <th>Generated Table Name</th>
+                                                <th>No. of Data Points</th>
                                                 <th>Actions</th>
                                             </tr>
                                             <tr ng-repeat="f in form">
                                                 <td>
-                                                    {{ f.name  }}
+                                                    {{ f.formName  }}
                                                 </td>
                                                 <td>
-                                                    {{ f.formName }}
+                                                    {{ f.tableName }}
                                                 </td>
                                                 <td>
-                                                    {{ f.ddlQuery }}
+                                                    {{ f.dataPoints }}
                                                 </td>
                                                 <td>
                                                     <button type="button" class="btn btn-warning" data-toggle="modal"
-                                                            data-target="#generalMessage" ng-click="showDdlQuery(test)">
+                                                            data-target="#ddlMessage" ng-click="showDdlQuery(f.ddlStatement)">
                                                         DDL
                                                     </button>
                                                     <button type="button" class="btn btn-warning" data-toggle="modal"
-                                                            data-target="#generalMessage" ng-click="showDmlQuery(test)">
+                                                            data-target="#generalMessage" ng-click="showDmlQuery(f.dmlStatement)">
                                                         DML
                                                     </button>
                                                 </td>
@@ -138,11 +139,12 @@ th, td {
             </div>
         </div>
 
-        <!-- general message modal -->
+        <!-- dml message modal -->
         <div class="modal fade" id="generalMessage" tabindex="-1" role="dialog" aria-labelledby="generalMessageModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header modal-header-warning">
+                        <h2 class="modal-title" id="generalMessageModalCenterTitle">DML</h2>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -150,22 +152,30 @@ th, td {
 
                     <div class="modal-body">
                         <div>
-                            Active Order Already exits. Please check the Active Orders Tab to cancel the order and proceed.
-                            Further building on the psychological aspect of employee engagement, there are researchers that define employee engagement by distinguishing it from closely related concepts within organizational behavior such as job involvement and organizational commitment. May et al. (2004, p. 12) argue that compared to job involvement employee engagement relates more to how individuals employ themselves when performing a task at work, and similarly to the definition given by Kahn (1990) engaged employees will actively make use of emotions, behaviors, and cognitions. In contrast, job involvement is more concerned with one’s personal psychological identification with the job. The concepts are however related and engagement can be thought of as an antecedent to job involvement; employees who are highly engaged in their jobs can come to feel as though the job situation is central to them and to his or her identity (May et al., 2004, p. 12).
-                            Current research that connects the concepts of employee engagement and motivation has predominantly been done from the perspective of the employee, aiming to identify the drivers that employees value the most in their engagement. We can also see that managers clearly play a large role in the engagement of their employees, and a significant amount of employees mention management and work relationships as one of the main drivers behind their engagement at work (Towers Perrin, 2008; Scott & McMullen, 2010; Society for Human Resource Management, 2013). Therefore, in order to advance prior research, it should be explored how managers perceive the influence of extrinsic and intrinsic motivation on employee engagement. This study gives insight into how managers within the public and private sectors perceive their own abilities to influence employees’ engagement through extrinsic and intrinsic motivational factors, and will complement the existing literature in this field which is largely based on the employee perspective. Additionally, the studies that have been conducted have been of quantitative nature, surveying employees of organizations to uncover the drivers behind engagement. This study aims to provide more in-depth information and develop a deeper understanding of managers’ perceptions and following actions, and whether or not they are in line with what employees
-                            have claimed to engage them, which leads us to our formulated research question.
-                            Active Order Already exits. Please check the Active Orders Tab to cancel the order and proceed.
-                            Further building on the psychological aspect of employee engagement, there are researchers that define employee engagement by distinguishing it from closely related concepts within organizational behavior such as job involvement and organizational commitment. May et al. (2004, p. 12) argue that compared to job involvement employee engagement relates more to how individuals employ themselves when performing a task at work, and similarly to the definition given by Kahn (1990) engaged employees will actively make use of emotions, behaviors, and cognitions. In contrast, job involvement is more concerned with one’s personal psychological identification with the job. The concepts are however related and engagement can be thought of as an antecedent to job involvement; employees who are highly engaged in their jobs can come to feel as though the job situation is central to them and to his or her identity (May et al., 2004, p. 12).
-                            Current research that connects the concepts of employee engagement and motivation has predominantly been done from the perspective of the employee, aiming to identify the drivers that employees value the most in their engagement. We can also see that managers clearly play a large role in the engagement of their employees, and a significant amount of employees mention management and work relationships as one of the main drivers behind their engagement at work (Towers Perrin, 2008; Scott & McMullen, 2010; Society for Human Resource Management, 2013). Therefore, in order to advance prior research, it should be explored how managers perceive the influence of extrinsic and intrinsic motivation on employee engagement. This study gives insight into how managers within the public and private sectors perceive their own abilities to influence employees’ engagement through extrinsic and intrinsic motivational factors, and will complement the existing literature in this field which is largely based on the employee perspective. Additionally, the studies that have been conducted have been of quantitative nature, surveying employees of organizations to uncover the drivers behind engagement. This study aims to provide more in-depth information and develop a deeper understanding of managers’ perceptions and following actions, and whether or not they are in line with what employees
-                            have claimed to engage them, which leads us to our formulated research question.
-                            Active Order Already exits. Please check the Active Orders Tab to cancel the order and proceed.
-                            Further building on the psychological aspect of employee engagement, there are researchers that define employee engagement by distinguishing it from closely related concepts within organizational behavior such as job involvement and organizational commitment. May et al. (2004, p. 12) argue that compared to job involvement employee engagement relates more to how individuals employ themselves when performing a task at work, and similarly to the definition given by Kahn (1990) engaged employees will actively make use of emotions, behaviors, and cognitions. In contrast, job involvement is more concerned with one’s personal psychological identification with the job. The concepts are however related and engagement can be thought of as an antecedent to job involvement; employees who are highly engaged in their jobs can come to feel as though the job situation is central to them and to his or her identity (May et al., 2004, p. 12).
-                            Current research that connects the concepts of employee engagement and motivation has predominantly been done from the perspective of the employee, aiming to identify the drivers that employees value the most in their engagement. We can also see that managers clearly play a large role in the engagement of their employees, and a significant amount of employees mention management and work relationships as one of the main drivers behind their engagement at work (Towers Perrin, 2008; Scott & McMullen, 2010; Society for Human Resource Management, 2013). Therefore, in order to advance prior research, it should be explored how managers perceive the influence of extrinsic and intrinsic motivation on employee engagement. This study gives insight into how managers within the public and private sectors perceive their own abilities to influence employees’ engagement through extrinsic and intrinsic motivational factors, and will complement the existing literature in this field which is largely based on the employee perspective. Additionally, the studies that have been conducted have been of quantitative nature, surveying employees of organizations to uncover the drivers behind engagement. This study aims to provide more in-depth information and develop a deeper understanding of managers’ perceptions and following actions, and whether or not they are in line with what employees
-                            have claimed to engage them, which leads us to our formulated research question.
-                            Active Order Already exits. Please check the Active Orders Tab to cancel the order and proceed.
-                            Further building on the psychological aspect of employee engagement, there are researchers that define employee engagement by distinguishing it from closely related concepts within organizational behavior such as job involvement and organizational commitment. May et al. (2004, p. 12) argue that compared to job involvement employee engagement relates more to how individuals employ themselves when performing a task at work, and similarly to the definition given by Kahn (1990) engaged employees will actively make use of emotions, behaviors, and cognitions. In contrast, job involvement is more concerned with one’s personal psychological identification with the job. The concepts are however related and engagement can be thought of as an antecedent to job involvement; employees who are highly engaged in their jobs can come to feel as though the job situation is central to them and to his or her identity (May et al., 2004, p. 12).
-                            Current research that connects the concepts of employee engagement and motivation has predominantly been done from the perspective of the employee, aiming to identify the drivers that employees value the most in their engagement. We can also see that managers clearly play a large role in the engagement of their employees, and a significant amount of employees mention management and work relationships as one of the main drivers behind their engagement at work (Towers Perrin, 2008; Scott & McMullen, 2010; Society for Human Resource Management, 2013). Therefore, in order to advance prior research, it should be explored how managers perceive the influence of extrinsic and intrinsic motivation on employee engagement. This study gives insight into how managers within the public and private sectors perceive their own abilities to influence employees’ engagement through extrinsic and intrinsic motivational factors, and will complement the existing literature in this field which is largely based on the employee perspective. Additionally, the studies that have been conducted have been of quantitative nature, surveying employees of organizations to uncover the drivers behind engagement. This study aims to provide more in-depth information and develop a deeper understanding of managers’ perceptions and following actions, and whether or not they are in line with what employees
-                            have claimed to engage them, which leads us to our formulated research question.
+                           {{dmlObj}}
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button"  data-dismiss="modal" ng-click="closeModal()">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ddl message modal -->
+        <div class="modal fade" id="ddlMessage" tabindex="-1" role="dialog" aria-labelledby="ddlMessageModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header modal-header-warning">
+                        <h5 class="modal-title" id="ddlMessageModalCenterTitle">DDL</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div>
+                            {{ddlObj}}
                         </div>
                     </div>
                     <div class="modal-footer">
