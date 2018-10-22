@@ -48,7 +48,7 @@ public class DDLTemplate extends QueryTemplate {
             return null;
         String pointDataType = dataPoint.getDataType();
         String columnTypeString = null;
-        if (pointDataType.equals("Coded") || pointDataType.equals("Numeric")) {
+        if (pointDataType.equals("Coded")) {
             columnTypeString = "INT(11)";
         } else if (pointDataType.equals("Boolean")) {
             columnTypeString = "VARCHAR(10)";
@@ -56,6 +56,8 @@ public class DDLTemplate extends QueryTemplate {
             columnTypeString = "DATETIME";
         } else if (pointDataType.equals("Text")) {
             columnTypeString = "VARCHAR(255)";
+        } else if (pointDataType.equals("Numeric")) {
+            columnTypeString = "DOUBLE";
         }
 
         return columnTypeString;

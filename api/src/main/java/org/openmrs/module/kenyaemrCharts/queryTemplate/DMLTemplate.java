@@ -134,7 +134,7 @@ public class DMLTemplate extends QueryTemplate {
         builder.append("\tselect form_id from form where uuid in(':formUUIDs')");
         builder.append(") f on f.form_id=e.form_id \n");
         builder.append("left outer join obs o on o.encounter_id=e.encounter_id");
-        builder.append("\t and o.concept_id in (:conceptList)\n");
+        builder.append(" and o.concept_id in (:conceptList)\n");
         builder.append("where e.voided=0\n");
         builder.append("group by e.patient_id, e.encounter_id, visit_date");
         return builder.toString();
