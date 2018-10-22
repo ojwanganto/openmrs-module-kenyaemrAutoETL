@@ -58,4 +58,20 @@ public class FormDataPoint {
     public void setDataType(String dataType) {
         this.dataType = dataType;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (o == null)
+            return false;
+        if (getClass() != o.getClass())
+            return false;
+        FormDataPoint pn = (FormDataPoint) o;
+        return pn.getConceptId().equals(this.getConceptId());
+    }
+    @Override
+    public int hashCode() {
+        return getConceptId().hashCode();
+    }
 }
