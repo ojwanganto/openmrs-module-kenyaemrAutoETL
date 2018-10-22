@@ -1,6 +1,9 @@
 package org.openmrs.module.kenyaemrCharts.forms;
 
 import org.apache.commons.lang.StringUtils;
+import org.codehaus.jackson.node.ArrayNode;
+import org.codehaus.jackson.node.JsonNodeFactory;
+import org.codehaus.jackson.node.ObjectNode;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -29,7 +32,7 @@ public class FormProcessor {
 
 
 
-    public static void getAllForms(FormManager formManager, ResourceFactory resourceFactory) {
+    public static String getAllForms(FormManager formManager, ResourceFactory resourceFactory) {
 
         ConceptService conceptService = Context.getConceptService();
 
@@ -49,6 +52,9 @@ public class FormProcessor {
         );
         System.out.println("############################# HTML Form Processor #########################");
         String formHtml = null;
+        ArrayNode generatedFormList = JsonNodeFactory.instance.arrayNode();
+        ObjectNode generatedForms = JsonNodeFactory.instance.objectNode();
+
         for(FormDescriptor formDescriptor : formList) {
             String targetUuid = formDescriptor.getTargetUuid();
             Form form = Context.getFormService().getFormByUuid(targetUuid);
@@ -67,6 +73,8 @@ public class FormProcessor {
                 if (htmlForm != null && whiteList.contains(targetUuid)) {
                     System.out.println("Html Form: " + htmlForm.getUuid() + " , Name: " + htmlForm.getName());
 
+                    ObjectNode generatedFormEtl = JsonNodeFactory.instance.objectNode();
+
                     HtmlEtlFormSchema schema = new HtmlEtlFormSchema(targetUuid, htmlForm.getName());
                     //process generated table name
                     String generatedTableName = StringUtils.replace(htmlForm.getName()," ", "_");
@@ -74,6 +82,8 @@ public class FormProcessor {
                     generatedTableName = StringUtils.replace(generatedTableName,")", "_");
                     schema.setGeneratedTableName(generatedTableName.toLowerCase());
                     formHtml = htmlForm.getXmlData();
+                    generatedFormEtl.put("formName", htmlForm.getName());
+                    generatedFormEtl.put("tableName", generatedTableName.toLowerCase());
                     Document doc = Jsoup.parse(formHtml);
                     for( Element element : doc.select("repeat") ){
                         element.remove();
@@ -118,14 +128,20 @@ public class FormProcessor {
 
                     }
                     schema.setDataPoints(dataPoints);
+                    generatedFormEtl.put("dataPoints", String.valueOf(dataPoints.size()));
+                    generatedFormEtl.put("ddlStatement",FormMetadataUtils.buildHtmlEtlTableDDL(schema));
+                    generatedFormEtl.put("dmlStatement",FormMetadataUtils.buildHtmlEtlTableDML(schema));
+                    generatedFormList.add(generatedFormEtl);
                     //FormMetadataUtils.htmlFormSchemaPrintout(schema);
-                    System.out.println("####################################### DDL Query ########################################");
+                   /* System.out.println("####################################### DDL Query ########################################");
 
                     System.out.println(FormMetadataUtils.buildHtmlEtlTableDDL(schema));
-                    System.out.println(FormMetadataUtils.buildHtmlEtlTableDML(schema));
+                    System.out.println(FormMetadataUtils.buildHtmlEtlTableDML(schema));*/
 
                 }
             }
         }
+        //generatedForms.put("forms", generatedFormList);
+        return generatedFormList.toString();
     }
 }

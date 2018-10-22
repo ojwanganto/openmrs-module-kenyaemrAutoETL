@@ -5,6 +5,7 @@ import org.openmrs.module.kenyacore.form.FormManager;
 import org.openmrs.module.kenyaemrCharts.forms.FormProcessor;
 import org.openmrs.module.kenyaui.annotation.AppPage;
 import org.openmrs.ui.framework.annotation.SpringBean;
+import org.openmrs.ui.framework.page.PageModel;
 import org.openmrs.ui.framework.resource.ResourceFactory;
 
 /**
@@ -13,9 +14,11 @@ import org.openmrs.ui.framework.resource.ResourceFactory;
 @AppPage("htmltoetlgenerator.home")
 public class KenyaemrHtmlToEtlHomePageController {
 
-    public void controller(@SpringBean FormManager formManager, @SpringBean ResourceFactory resourceFactory){
+    public void controller(@SpringBean FormManager formManager, @SpringBean ResourceFactory resourceFactory, PageModel model){
         System.out.println("Preparing to process html forms");
-        FormProcessor.getAllForms(formManager, resourceFactory);
+        String allForms = FormProcessor.getAllForms(formManager, resourceFactory);
+        //System.out.println(allForms);
+        model.put("forms", allForms);
 
     }
 }
