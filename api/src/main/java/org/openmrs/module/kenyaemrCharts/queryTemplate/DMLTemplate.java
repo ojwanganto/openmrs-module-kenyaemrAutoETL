@@ -14,6 +14,12 @@ import java.util.Set;
 
 public class DMLTemplate extends QueryTemplate {
     private Set<Integer> conceptIds = new HashSet<Integer>();
+    /**
+     * Generates a complete DDL statement for a form.
+     * It has split query sections into: header, body, tail and standard fields.
+     * @param schema
+     * @return
+     */
     @Override
     public String generateQuery(HtmlEtlFormSchema schema) {
         if (schema == null)
@@ -36,6 +42,12 @@ public class DMLTemplate extends QueryTemplate {
         return substituedString;
     }
 
+    /**
+     * Refer to DDLTemplate for an equivalent method
+     * @param tableName
+     * @param dataPoints
+     * @return
+     */
     private String getQueryHeader(String tableName, Set<FormDataPoint> dataPoints) {
         if (tableName == null)
             return null;
@@ -50,6 +62,11 @@ public class DMLTemplate extends QueryTemplate {
 
     }
 
+    /**
+     * Refer to DDLTemplate for an equivalent method
+     * @param dataPoints
+     * @return
+     */
     private String buildQueryBody(Set<FormDataPoint> dataPoints) {
         if (dataPoints == null || dataPoints.size() == 0)
             return null;
@@ -66,6 +83,11 @@ public class DMLTemplate extends QueryTemplate {
 
     }
 
+    /**
+     * Refer to DDLTemplate for an equivalent method
+     * @param dataPoint
+     * @return
+     */
     private String getTypeFromDataPoint(FormDataPoint dataPoint) {
         if (dataPoint == null || null == dataPoint.getDataType() || "".equals(dataPoint.getDataType()))
             return null;
@@ -86,12 +108,21 @@ public class DMLTemplate extends QueryTemplate {
         return builder.toString().replace(":conceptId", String.valueOf(dataPoint.getConceptId()));
     }
 
+    /**
+     * Refer to DDLTemplate for an equivalent method
+     * @param dataPoints
+     * @return
+     */
     private String buildQueryTail(Set<FormDataPoint> dataPoints) {
         if (dataPoints == null || dataPoints.size() == 0)
             return null;
         return "\te.voided\n";
     }
 
+    /**
+     * Refer to DDLTemplate for an equivalent method
+     * @return
+     */
     private String getStandardFromFields() {
         StringBuilder builder = new StringBuilder();
         builder.append("select \n")

@@ -29,30 +29,6 @@ public class FormMetadataUtils {
     }
 
     /**
-     * Generates toString equivalent of HtmlEtlFormSchema.
-     * @param schema
-     */
-    public static void htmlFormSchemaPrintout(HtmlEtlFormSchema schema) {
-
-        StringBuilder builder = new StringBuilder();
-        builder.append("Form: ").append(schema.getFormName()).append("\n");
-        builder.append("Form Table: ").append(schema.getGeneratedTableName()).append("\n");
-        builder.append("Form UUID: ").append(schema.getFormUUID()).append("\n");
-        builder.append("Data Points: ").append("\n");
-
-        for (FormDataPoint point : schema.getDataPoints()) {
-            builder.append("\tObs tag: ").append(point.getConceptUUID()).append("\n");
-            builder.append("\tConcept ID: ").append(String.valueOf(point.getConceptId())).append("\n");
-            builder.append("\tConcept Name: ").append(point.getConceptName()).append("\n");
-            builder.append("\tGenerated Name: ").append(point.getGeneratedName()).append("\n");
-            builder.append("\tConcept datatype: ").append(point.getDataType()).append("\n");
-            builder.append("-------------------------------------------------").append("\n");
-        }
-        builder.append("################################# End ################################");
-        System.out.println(builder.toString());
-    }
-
-    /**
      * Constructs DDL statement for creating ETL table from schema information
      * @param schema
      * @return SQL statement
@@ -76,6 +52,11 @@ public class FormMetadataUtils {
         return dmlTemplate.generateQuery(schema);
     }
 
+    /**
+     * Should define the default database.
+     * TODO: complete this
+     * @return
+     */
     public static String createDatabase() {
 
         return null;

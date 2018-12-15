@@ -9,15 +9,13 @@ import org.openmrs.ui.framework.page.PageModel;
 import org.openmrs.ui.framework.resource.ResourceFactory;
 
 /**
- * Controller class for html to etl table page
+ * Controller class for html to etl page
  */
 @AppPage("htmltoetlgenerator.home")
 public class KenyaemrHtmlToEtlHomePageController {
 
     public void controller(@SpringBean FormManager formManager, @SpringBean ResourceFactory resourceFactory, PageModel model){
-        System.out.println("Preparing to process html forms");
         String allForms = FormProcessor.getAllForms(formManager, resourceFactory);
-        //System.out.println(allForms);
         model.put("forms", allForms);
 
     }

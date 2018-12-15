@@ -28,15 +28,21 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * This class generates all required DDL  and DML for forms based on query templates
+ */
 public class FormProcessor {
-
-
 
     public static String getAllForms(FormManager formManager, ResourceFactory resourceFactory) {
 
         ConceptService conceptService = Context.getConceptService();
 
         List<FormDescriptor> formList = new ArrayList<FormDescriptor>(formManager.getAllFormDescriptors());
+
+        /**
+         * The whitelist contains uuid of forms to be processed.
+         * TODO: expose the whitelist in a configurable object probably through a UI
+         */
         List<String> whiteList = Arrays.asList(
                 "e958f902-64df-4819-afd4-7fb061f59308",
                 "37f6bd8d-586a-4169-95fa-5781f987fe62",
@@ -47,13 +53,15 @@ public class FormProcessor {
                 "83fb6ab2-faec-4d87-a714-93e77a28a201"
         );
 
+        /**
+         * The blacklist contains uuids of forms to be skipped during processing.
+         * TODO: expose this through a UI
+         */
         List<String> blackList = Arrays.asList(
                 "04295648-7606-11e8-adc0-fa7ae01bbebc"
         );
-        System.out.println("############################# HTML Form Processor #########################");
-        String formHtml = null;
+        String formHtml;
         ArrayNode generatedFormList = JsonNodeFactory.instance.arrayNode();
-        ObjectNode generatedForms = JsonNodeFactory.instance.objectNode();
 
         for(FormDescriptor formDescriptor : formList) {
             String targetUuid = formDescriptor.getTargetUuid();
@@ -94,9 +102,7 @@ public class FormProcessor {
                     }
 
                     Element htmlform = doc.select("htmlform").first();
-
                     Elements obsTags = htmlform.select("obs");
-
                     Set<FormDataPoint> dataPoints = new HashSet<FormDataPoint>();
                     for (Element obsTag : obsTags) {
                         String conceptUUId = obsTag.attr("conceptId");
@@ -132,16 +138,10 @@ public class FormProcessor {
                     generatedFormEtl.put("ddlStatement",FormMetadataUtils.buildHtmlEtlTableDDL(schema));
                     generatedFormEtl.put("dmlStatement",FormMetadataUtils.buildHtmlEtlTableDML(schema));
                     generatedFormList.add(generatedFormEtl);
-                    //FormMetadataUtils.htmlFormSchemaPrintout(schema);
-                   /* System.out.println("####################################### DDL Query ########################################");
-
-                    System.out.println(FormMetadataUtils.buildHtmlEtlTableDDL(schema));
-                    System.out.println(FormMetadataUtils.buildHtmlEtlTableDML(schema));*/
-
                 }
             }
         }
-        //generatedForms.put("forms", generatedFormList);
+
         return generatedFormList.toString();
     }
 }
