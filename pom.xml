@@ -6,13 +6,13 @@
 	<artifactId>kenyaemrCharts</artifactId>
 	<version>1.0.1</version>
 	<packaging>pom</packaging>
-	<name>KenyaEMR ETL Management</name>
-	<description>dhoc charts</description>
+	<name>KenyaEMR ETL Auto-ETL</name>
+	<description>Generates ETL Queries from form metadata</description>
 	<url>https://wiki.openmrs.org/display/docs/KenyaEMR+Adhoc+Charts+Module+Module</url>
 	
 	<developers>
 		<developer>
-			<name>kenyaEMR Developers</name>
+			<name>Ojwang Antony</name>
 		</developer>
 	</developers>
 	
@@ -38,7 +38,7 @@
 		<calculationVersion>1.1</calculationVersion>
 		<htmlformentryVersion>2.4</htmlformentryVersion>
 		<htmlwidgetsVersion>1.6.6</htmlwidgetsVersion>
-		<kenyaemrVersion>16.0.2</kenyaemrVersion>
+		<kenyaemrVersion>17.0.0-beta</kenyaemrVersion>
 		<idgenVersion>2.6</idgenVersion>
 		<kenyacoreVersion>2.4.1-SNAPSHOT</kenyacoreVersion>
 		<kenyauiVersion>2.0.6</kenyauiVersion>
