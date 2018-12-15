@@ -11,32 +11,13 @@
     ui.includeJavascript("uicommons", "angular-common.js")
     ui.includeJavascript("uicommons", "angular-ui/ui-bootstrap-tpls-0.11.2.js")
     ui.includeJavascript("uicommons", "ngDialog/ngDialog.js")
-    ui.includeJavascript("orderentryui", "bootstrap.min.js")
+    ui.includeJavascript("kenyaemrCharts", "bootstrap.min.js")
 
 
-    ui.includeJavascript("uicommons", "filters/display.js")
-    ui.includeJavascript("uicommons", "filters/serverDate.js")
-    ui.includeJavascript("uicommons", "services/conceptService.js")
-    ui.includeJavascript("uicommons", "services/drugService.js")
-    ui.includeJavascript("uicommons", "services/encounterService.js")
-    ui.includeJavascript("uicommons", "services/orderService.js")
-    ui.includeJavascript("uicommons", "services/session.js")
-
-    ui.includeJavascript("uicommons", "directives/select-concept-from-list.js")
-    ui.includeJavascript("uicommons", "directives/select-order-frequency.js")
-    ui.includeJavascript("uicommons", "directives/select-drug.js")
-    ui.includeJavascript("orderentryui", "order-model.js")
-    ui.includeJavascript("orderentryui", "order-entry.js")
     ui.includeJavascript("kenyaemrCharts", "htmlEtl.js")
-
     ui.includeCss("uicommons", "ngDialog/ngDialog.min.css")
-    ui.includeCss("orderentryui", "drugOrders.css")
     ui.includeCss("uicommons", "styleguide/jquery-ui-1.9.2.custom.min.css")
-    ui.includeCss("orderentryui", "index.css")
-
-
-    ui.includeCss("orderentryui", "bootstrap.min.css")
-    ui.includeCss("orderentryui", "labOrders.css")
+    ui.includeCss("kenyaemrCharts", "bootstrap.min.css")
 %>
 <style type="text/css">
 #new-order input {
