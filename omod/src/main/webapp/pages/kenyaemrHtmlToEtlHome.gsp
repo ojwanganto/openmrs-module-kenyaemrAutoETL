@@ -50,16 +50,16 @@ th, td {
 
                 <div id="program-tabs" class="ke-tabs">
                     <div class="ke-tabmenu">
-                        <div class="ke-tabmenu-item" data-tabid="active_orders">ETL Processing</div>
+                        <div class="ke-tabmenu-item" data-tabid="auto_etl_output">Auto-ETL Output</div>
 
                     </div>
 
-                    <div class="ke-tab" data-tabid="active_orders" style="padding-top: 10px">
+                    <div class="ke-tab" data-tabid="auto_etl_output" style="padding-top: 10px">
                         <form>
                             <div class="card">
                                 <div class="card-header">
                                     <h4 class="card-title">
-                                        Process ETL
+                                        Metadata Processing
                                     </h4>
                                 </div>
 
