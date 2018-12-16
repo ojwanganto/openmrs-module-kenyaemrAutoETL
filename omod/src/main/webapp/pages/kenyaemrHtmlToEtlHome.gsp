@@ -46,11 +46,11 @@ th, td {
         <div class="ui-tabs">
 
             <div class="ui-tabs-panel ui-widget-content">
-                <h3>ETL</h3>
+                <h3>Auto-ETL Output</h3>
 
                 <div id="program-tabs" class="ke-tabs">
                     <div class="ke-tabmenu">
-                        <div class="ke-tabmenu-item" data-tabid="auto_etl_output">Auto-ETL Output</div>
+                        <div class="ke-tabmenu-item" data-tabid="auto_etl_output">Metadata Processing</div>
 
                     </div>
 
@@ -59,7 +59,7 @@ th, td {
                             <div class="card">
                                 <div class="card-header">
                                     <h4 class="card-title">
-                                        Metadata Processing
+
                                     </h4>
                                 </div>
 
