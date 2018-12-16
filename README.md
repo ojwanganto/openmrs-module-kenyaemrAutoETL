@@ -1,11 +1,13 @@
-KenyaEMR Auto-ETL 
+# KenyaEMR Auto-ETL 
 
 This module uses form metadata to generate SQL statements used to create ETL tables for reporting in KenyaEMR. 
 
-Deployment
+**Deployment**
+
 This is a KenyaEMR add-on module and requires a KenyaEMR environment.
 
-Use
+**Use**
+
 
 The module adds an app on home page labeled HTML to ETL  and the details are as shown in figure 1, figure 2 and figure 3 below.
 
