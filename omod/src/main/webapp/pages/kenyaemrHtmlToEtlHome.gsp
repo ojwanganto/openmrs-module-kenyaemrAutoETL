@@ -83,11 +83,11 @@ th, td {
                                                     {{ f.dataPoints }}
                                                 </td>
                                                 <td>
-                                                    <button type="button" class="btn btn-warning" data-toggle="modal"
+                                                    <button type="button" class="btn btn-secondary" data-toggle="modal"
                                                             data-target="#ddlMessage" ng-click="showDdlQuery(f.ddlStatement)">
                                                         DDL
                                                     </button>
-                                                    <button type="button" class="btn btn-warning" data-toggle="modal"
+                                                    <button type="button" class="btn btn-secondary" data-toggle="modal"
                                                             data-target="#generalMessage" ng-click="showDmlQuery(f.dmlStatement)">
                                                         DML
                                                     </button>
