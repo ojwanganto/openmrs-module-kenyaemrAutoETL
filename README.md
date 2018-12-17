@@ -4,7 +4,7 @@ This module uses form metadata to generate SQL statements used to create ETL tab
 
 **Deployment**
 
-This is a KenyaEMR add-on module and requires a KenyaEMR environment.
+This is a KenyaEMR add-on module and requires a KenyaEMR environment. For more details on how to set this up, please refer to the documentation at  https://wiki.openmrs.org/display/projects/KenyaEMR+Distribution
 
 **Use**
 
